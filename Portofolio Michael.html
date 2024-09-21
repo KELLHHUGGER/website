@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio Michael</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 100%);
+            color: #333;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            background: linear-gradient(90deg, #3498db, #9b59b6);
+            color: #fff;
+            text-align: center;
+            padding: 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
+        }
+
+        header p {
+            font-size: 1.2rem;
+        }
+
+        section {
+            margin: 2rem auto;
+            padding: 2rem;
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        h2 {
+            margin-bottom: 1rem;
+            font-size: 2rem;
+            color: #8e44ad;
+            text-transform: uppercase;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            margin: 1rem 0;
+            font-size: 1.2rem;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease-in-out;
+        }
+
+        a:hover {
+            color: #e74c3c;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: #2c3e50;
+            color: #fff;
+            margin-top: 3rem;
+            font-size: 1.1rem;
+        }
+
+        #toTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 100;
+            font-size: 18px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #toTopBtn:hover {
+            background-color: #c0392b;
+        }
+
+        .show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #project-details {
+            display: none;
+            margin: 2rem auto;
+            padding: 2rem;
+            max-width: 800px;
+            background-color: #3ce778;
+            border-radius: 10px;
+            color: white;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 1rem;
+            color: #fff;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .back-link:hover {
+            color: #ddd;
+        }
+
+        .nested {
+            display: none;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Portofolio</h1>
+        <p>Michael Christian Yusnadi</p>
+    </header>
+
+    <section id="about">
+        <h2>Tentang Saya</h2>
+        <p>Halo, saya Michael, seorang siswa di SMK Kristen Petra Surabaya. Hobi saya adalah bermain game dan coding (kalau tidak malas). Saya memiliki pengalaman dalam bidang TKJ. Saya suka belajar dan mengembangkan kemampuan saya dalam komputer dan jaringan.</p>
+    </section>
+
+    <section id="projects">
+        <h2>Project/PPT</h2>
+        <ul>
+            <li>
+                <a onclick="toggleNested('admin-jaringan')">Administrasi Sistem Jaringan</a>
+                <ul class="nested" id="admin-jaringan">
+                    <li><a onclick="showProject('Konfigurasi FTP Server pada Debian', 'Ini adalah deskripsi lebih detail untuk Proyek Konfigurasi FTP Server.')">Konfigurasi FTP Server pada Debian</a></li>
+                    <li><a onclick="showProject('Konfigurasi Remote Server pada Debian', 'Ini adalah deskripsi lebih detail untuk Proyek Konfigurasi Remote Server.')">Konfigurasi Remote Server pada Debian</a></li>
+                </ul>
+            </li>
+            <li>
+                <a onclick="toggleNested('keamanan-jaringan')">Keamanan Jaringan</a>
+                <ul class="nested" id="keamanan-jaringan">
+                    <li><a onclick="showProject('Cisco Packet Tracer Firewall', 'Ini adalah deskripsi lebih detail untuk Proyek.')">Cisco Packet Tracer Firewall</a></li>
+                    <li><a onclick="showProject('Cisco Packet Tracer Routing Statis', 'Ini adalah deskripsi lebih detail untuk Proyek.')">Cisco Packet Tracer Routing Statis</a></li>
+                </ul>
+            </li>
+            <li>
+                <a onclick="toggleNested('teknologi-jaringan')">Teknologi Jaringan Kabel dan Nirkabel</a>
+                <ul class="nested" id="teknologi-jaringan">
+                    <li><a onclick="showProject('Projek akan datang', 'Ini adalah deskripsi lebih detail untuk Proyek yang akan datang.')">projek akan datang</a></li>
+                    <li><a onclick="showProject('Projek akan datang', 'Ini adalah deskripsi lebih detail untuk Proyek yang akan datang.')">projek akan datang</a></li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+
+    <!-- Detail Proyek -->
+    <section id="project-details">
+        <h2 id="project-title"></h2>
+        <p id="project-description"></p>
+        <span class="back-link" onclick="hideProject()">Kembali ke Proyek</span>
+    </section>
+
+    <section id="contact">
+        <h2>Kontak</h2>
+        <p>Email: <a href="mailto:2023070998@student.pppkpetra.sch.id">2023070998@student.pppkpetra.sch.id</a></p>
+        <p>Whatsapp: <a href="https://wa.me/6285888113798">0858-8811-3798</a></p>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Nama Kamu. Dibuat dengan HTML, CSS, dan JavaScript berwarna.</p>
+    </footer>
+
+    <!-- Tombol Kembali ke Atas -->
+    <button id="toTopBtn" onclick="scrollToTop()">Kembali ke Atas</button>
+
+    <script>
+        // Efek Scroll untuk Menampilkan Elemen Saat Muncul di Layar
+        const sections = document.querySelectorAll('section');
+
+        const options = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, options);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Tombol Kembali ke Atas
+        const toTopBtn = document.getElementById('toTopBtn');
+
+        window.onscroll = function() {
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                toTopBtn.style.display = "block";
+            } else {
+                toTopBtn.style.display = "none";
+            }
+        };
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        }
+
+        // Menampilkan detail proyek
+        function showProject(title, description) {
+            document.getElementById('project-title').innerText = title;
+            document.getElementById('project-description').innerText = description;
+            document.getElementById('projects').style.display = 'none';
+            document.getElementById('project-details').style.display = 'block';
+        }
+
+        // Kembali ke daftar proyek
+        function hideProject() {
+            document.getElementById('project-details').style.display = 'none';
+            document.getElementById('projects').style.display = 'block';
+        }
+
+        // Mengontrol tampilan proyek nested
+        function toggleNested(id) {
+            const nested = document.getElementById(id);
+            if (nested.style.display === "block") {
+                nested.style.display = "none";
+            } else {
+                nested.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>
